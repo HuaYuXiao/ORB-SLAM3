@@ -71,26 +71,24 @@ We use modified versions of the [DBoW2](https://github.com/dorian3d/DBoW2) libra
 ## Python
 Required to calculate the alignment of the trajectory with the ground truth. **Required Numpy module**.
 
-* (win) http://www.python.org/downloads/windows
-* (deb) `sudo apt install libpython2.7-dev`
-* (mac) preinstalled with osx
+`sudo apt install libpython2.7-dev`
 
-## ROS (optional)
+## ROS
 
 We provide some examples to process input of a monocular, monocular-inertial, stereo, stereo-inertial or RGB-D camera using ROS. Building these examples is optional. These have been tested with ROS Melodic under Ubuntu 18.04.
 
 # 3. Building ORB-SLAM3 library and examples
-
-Clone the repository:
-```
-git clone https://github.com/UZ-SLAMLab/ORB_SLAM3.git ORB_SLAM3
-```
 
 We provide a script `build.sh` to build the *Thirdparty* libraries and *ORB-SLAM3*. Please make sure you have installed all required dependencies (see section 2). Execute:
 ```
 cd ORB_SLAM3
 chmod +x build.sh
 ./build.sh
+```
+
+```bash
+catkin_make install --source src/ORB-SLAM3 --build build/orb_slam3
+catkin_make install --source src/ORB-SLAM3/Examples/ROS/ORB_SLAM3 --build build/orb_slam3
 ```
 
 This will create **libORB_SLAM3.so**  at *lib* folder and the executables in *Examples* folder.
@@ -154,7 +152,6 @@ Execute the following script to process sequences and compute the RMS ATE:
 # 7. ROS Examples
 
 ### Building the nodes for mono, mono-inertial, stereo, stereo-inertial and RGB-D
-Tested with ROS Melodic and ubuntu 18.04.
 
 1. Add the path including *Examples/ROS/ORB_SLAM3* to the ROS_PACKAGE_PATH environment variable. Open .bashrc file:
   ```
@@ -172,6 +169,10 @@ and add at the end the following line. Replace PATH by the folder where you clon
   chmod +x build_ros.sh
   ./build_ros.sh
   ```
+
+```bash
+catkin_make install --source src/ORB-SLAM3/Examples/ROS/ORB_SLAM3 --build build/orb_slam3
+```
   
 ### Running Monocular Node
 For a monocular input from topic `/camera/image_raw` run node ORB_SLAM3/Mono. You will need to provide the vocabulary file and a settings file. See the monocular examples above.
@@ -208,10 +209,11 @@ For an RGB-D input from topics `/camera/rgb/image_raw` and `/camera/depth_regist
   rosrun ORB_SLAM3 RGBD PATH_TO_VOCABULARY PATH_TO_SETTINGS_FILE
   ```
 
+```bash
+roslaunch orb_slam3 simulation.launch
+```
+
 **Running ROS example:** Download a rosbag (e.g. V1_02_medium.bag) from the EuRoC dataset (http://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets). Open 3 tabs on the terminal and run the following command at each tab for a Stereo-Inertial configuration:
-  ```
-  roscore
-  ```
   
   ```
   rosrun ORB_SLAM3 Stereo_Inertial Vocabulary/ORBvoc.txt Examples/Stereo-Inertial/EuRoC.yaml true
