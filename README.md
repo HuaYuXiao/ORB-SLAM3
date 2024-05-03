@@ -88,6 +88,7 @@ chmod +x build.sh
 
 ```bash
 catkin_make install --source src/ORB-SLAM3 --build build/orb_slam3
+catkin_make install --source src/ORB-SLAM3/Examples/ROS/ORB_SLAM3 --build build/orb_slam3
 ```
 
 This will create **libORB_SLAM3.so**  at *lib* folder and the executables in *Examples* folder.
@@ -168,6 +169,10 @@ and add at the end the following line. Replace PATH by the folder where you clon
   chmod +x build_ros.sh
   ./build_ros.sh
   ```
+
+```bash
+catkin_make install --source src/ORB-SLAM3/Examples/ROS/ORB_SLAM3 --build build/orb_slam3
+```
   
 ### Running Monocular Node
 For a monocular input from topic `/camera/image_raw` run node ORB_SLAM3/Mono. You will need to provide the vocabulary file and a settings file. See the monocular examples above.
@@ -203,6 +208,10 @@ For an RGB-D input from topics `/camera/rgb/image_raw` and `/camera/depth_regist
   ```
   rosrun ORB_SLAM3 RGBD PATH_TO_VOCABULARY PATH_TO_SETTINGS_FILE
   ```
+
+```bash
+roslaunch orb_slam3 simulation.launch
+```
 
 **Running ROS example:** Download a rosbag (e.g. V1_02_medium.bag) from the EuRoC dataset (http://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets). Open 3 tabs on the terminal and run the following command at each tab for a Stereo-Inertial configuration:
   
